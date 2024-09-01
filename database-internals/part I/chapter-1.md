@@ -1,3 +1,8 @@
+- [Preview of Database-Internals book](#preview-of-database-internals-book)
+  - [Chapter 1](#chapter-1)
+- [questions to choose the best database for individual need:](#questions-to-choose-the-best-database-for-individual-need)
+  - [how to answer them:](#how-to-answer-them)
+
 ##### Preview of Database-Internals book
 ###### Chapter 1
 
