@@ -1,7 +1,7 @@
-&nbsp;
-<span style="color: #f2cf4a; font-family: Monospace; font-size: 3em;">Database internals</span>
 
-<span style="color: #f2cf4a; font-family: monospace; font-size: 2em;">Chapter 1</span>
+<span style="color: #f2cf4a; font-family: Babas; font-size: 3em;">Database internals</span>
+
+<span style="color: #f2cf4a; font-family: Babas; font-size: 2em;">Chapter 1</span>
 
 - Databases are modular systems and consist of multiple parts: a transport layer accepting requests, a query processor determining the most efficient way to run queries, an execution engine carrying out the operations, and a storage engine
 
@@ -104,11 +104,25 @@ different NoSQL type data stores:
 
 &nbsp;
 
-- how BigTable stores data:
-    - Bigtable stores data in scalable tables made up of columns and rows. Each table provides a sorted key/value map, with each row indexed by a single row key. Related columns are often grouped into column families and a unique name is assigned to each column family. The tables are also sparse; if a column does not contain data for a particular row, the cell does not use any storage space.
+###### wide-column stores:
+<img src=../images/figure1-3.png title="wide-column" width="200" height="200">
+<img src=../images/figure1-4.png title="wide-column" width="200" height="200">
+&nbsp;
 
-    - Within these tables, each row/column intersection can contain one or more cells. In a traditional relationship database table, each row/column intersection can contain only one cell. Every cell in a Bigtable table contains a unique timestamped version of the data. This approach enables Bigtable to maintain a record of how data has changed over time.
-    
-    - [more on BigTable](https://www.techtarget.com/searchdatamanagement/definition/Google-BigTable)
+###### desciription on wide-column stores:
+- Data is stored in a multidimensional sorted map with hierarchical indexes: we can locate the data related to a specific web page by its reversed URL and its contents or anchors by the timestamp. Each row is indexed by its row key. Related columns are grouped together in column families—contents and anchor in this example—which are stored on disk separately. Each column inside a column family is identified by the column key, which is a combination of the column family name and a qualifier (html, cnnsi.com, my.look.ca in this example). Column families store multiple versions of data by timestamp. This layout allows us to quickly locate the higher-level entries (web pages, in this case) and their parameters (versions of content and links to the other pages).
 
--
+- how **BigTable** stores data: ( as a wide column store)
+  - Bigtable stores data in scalable tables made up of columns and rows. Each table provides a sorted key/value map, with each row indexed by a single row key. Related columns are often grouped into column families and a unique name is assigned to each column family. The tables are also sparse; if a column does not contain data for a particular row, the cell does not use any storage space.
+
+  - Within these tables, each row/column intersection can contain one or more cells. In a traditional relationship database table, each row/column intersection can contain only one cell. Every cell in a Bigtable table contains a unique timestamped version of the data. This approach enables Bigtable to maintain a record of how data has changed over time.
+  
+  - [more on BigTable](https://www.techtarget.com/searchdatamanagement/definition/Google-BigTable)
+
+
+- Database systems store data records, consisting of multiple fields, in tables, where each table is usually represented as a separate file. Each record in the table can be looked up using a *search key*. To locate a record, database systems use *indexes*: auxiliary data structures that allow it to efficiently locate data records without scanning an entire table on every access. Indexes are built using a subset of fields identifying the record.
+
+- A database system usually separates data files and index files: data files store data records, while index files store record metadata and use it to locate records in data files. Index files are typically smaller than the data files. Files are partitioned into pages, which typically have the size of a single or multiple disk blocks. Pages can be organized as sequences of records or as a *slotted pages*.
+New records (insertions) and updates to the existing records are represented by key/value pairs. Most modern storage systems do not delete data from pages explicitly. Instead, they use deletion markers (also called *tombstones*), which contain deletion metadata, such as a key and a timestamp. Space occupied by the records shadowed by their updates or deletion markers is reclaimed during *garbage collection*, which reads the pages, writes the live (i.e., nonshadowed) records to the new place, and discards the shadowed ones.
+
+- 
