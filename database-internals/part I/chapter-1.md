@@ -1,10 +1,7 @@
-- [Preview of Database-Internals book](#preview-of-database-internals-book)
-  - [Chapter 1](#chapter-1)
-- [questions to choose the best database for individual need:](#questions-to-choose-the-best-database-for-individual-need)
-  - [how to answer them:](#how-to-answer-them)
+&nbsp;
+<span style="color: #f2cf4a; font-family: Babas; font-size: 3em;">Database internals</span>
 
-##### Preview of Database-Internals book
-###### Chapter 1
+<span style="color: #f2cf4a; font-family: Babas; font-size: 2em;">Chapter 1</span>
 
 - Databases are modular systems and consist of multiple parts: a transport layer accepting requests, a query processor determining the most efficient way to run queries, an execution engine carrying out the operations, and a storage engine
 
@@ -49,7 +46,7 @@ some sources group DBMSs into three major categories:
 
 &nbsp;
 
-Architecture of database management systems:  
+###### Architecture of database management systems:  
 
 <img src=../images/figure1-1.png alt="alt text" width="400" height="500"/>    
          
@@ -82,4 +79,36 @@ The parsed query is passed to the query optimizer, which first eliminates imposs
 
 - Databases using memory as a primary data store do this mainly because of performance, comparatively low access costs, and access granularity. Programming for main memory is also significantly simpler than doing so for the disk. Operating systems abstract memory management and allow us to think in terms of allocating and freeing arbitrarily sized memory chunks. On disk, we have to manage data references, serialization formats, freed memory, and fragmentation manually.
 
-- 
+- Before the operation can be considered complete, its results have to be written to a *sequential log* file. To avoid replaying complete log contents during startup or after a crash, in-memory stores maintain a **backup copy**. The backup copy is maintained as a sorted disk-based structure, and modifications to this structure are often *asynchronous* (decoupled from client requests) and applied in batches to reduce the number of I/O operations. During recovery, database contents can be restored from the backup and logs.
+
+- Log records are usually applied to backup in batches. After the batch of log records is processed, backup holds a database snapshot for a specific point in time, and log contents up to this point can be discarded. this process is called *checkpointing*
+
+- One of the ways to classify databases is by how the data is stored on disk: row or column-wise. Tables can be partitioned either *horizontally* (storing values belonging to the same row together), or *vertically* (storing values belonging to the same column together).
+
+- **Column-oriented stores** are a good fit for analytical workloads that compute aggregates, such as finding trends, computing average values, etc. Processing complex aggregates can be used in cases when logical records have multiple fields, but some of them have different importance and are often consumed together.
+
+- To reconstruct data tuples, which might be useful for joins, filtering, and multirow aggregates, we need to preserve some metadata on the column level to identify which data points from other columns it is associated with. If you do this explicitly, each value will have to hold a key, which introduces duplication and increases the amount of stored data. Some column stores use implicit identifiers (*virtual IDs*) instead and use the position of the value (in other words, its offset) to map it back to the related values
+
+- Reading multiple values for the same column in one run significantly improves cache utilization and computational efficiency. On modern CPUs, vectorized instructions can be used to process multiple data points with a single CPU instruction
+
+- Storing values that have the same data type together (e.g., numbers with other numbers, strings with other strings) offers a better compression ratio. We can use different compression algorithms depending on the data type and pick the most effective compression method for each case.
+
+- To decide whether to use a column or a row-oriented store, you need to understand your **access patterns**. If the read data is consumed in records (i.e., most or all of the columns are requested) and the workload consists mostly of point queries and range scans, the row-oriented approach is likely to yield better results. If scans span many rows, or compute aggregate over a subset of columns, it is worth considering a column-oriented approach.
+
+- Column-oriented databases should not be mixed up with wide column stores, such as *BigTable* or *HBase*, where data is represented as a multidimensional map, columns are grouped into column families (usually storing data of the same type), and inside each column family, data is stored row-wise. This layout is best for storing data retrieved by a key or a sequence of keys.
+
+different NoSQL type data stores:
+&nbsp;
+
+<img src=../images/nosql-1.png title="nosql" width="600" height="400">
+
+&nbsp;
+
+- how BigTable stores data:
+    - Bigtable stores data in scalable tables made up of columns and rows. Each table provides a sorted key/value map, with each row indexed by a single row key. Related columns are often grouped into column families and a unique name is assigned to each column family. The tables are also sparse; if a column does not contain data for a particular row, the cell does not use any storage space.
+
+    - Within these tables, each row/column intersection can contain one or more cells. In a traditional relationship database table, each row/column intersection can contain only one cell. Every cell in a Bigtable table contains a unique timestamped version of the data. This approach enables Bigtable to maintain a record of how data has changed over time.
+    
+    - [more on BigTable](https://www.techtarget.com/searchdatamanagement/definition/Google-BigTable)
+
+-
