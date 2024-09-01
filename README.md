@@ -4,3 +4,7 @@
 ##### List of Books:
 - Designing Data Intensive Application by Martin Kleppmann
 - Database Internals by Alex Petrov
+
+
+###### blog posts and source code links:
+- [Free learning platform for better future](https://www.javatpoint.com/dbms-tutorial)
