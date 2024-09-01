@@ -1,7 +1,7 @@
 &nbsp;
-<span style="color: #f2cf4a; font-family: Babas; font-size: 3em;">Database internals</span>
+<span style="color: #f2cf4a; font-family: Monospace; font-size: 3em;">Database internals</span>
 
-<span style="color: #f2cf4a; font-family: Babas; font-size: 2em;">Chapter 1</span>
+<span style="color: #f2cf4a; font-family: monospace; font-size: 2em;">Chapter 1</span>
 
 - Databases are modular systems and consist of multiple parts: a transport layer accepting requests, a query processor determining the most efficient way to run queries, an execution engine carrying out the operations, and a storage engine
 
