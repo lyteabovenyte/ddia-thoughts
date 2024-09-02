@@ -3,7 +3,7 @@
 
 #### List of Books:
 
-<span style="color: #f2cf4a; font-family: Babas; font-size: 2em;">Desinging Data Intensive Application by Martin kleppman</span>
+- <span style="color: #f2cf4a; font-family: Babas; font-size: 2em;">Desinging Data Intensive Application by Martin kleppman</span>
 
 Content is broken down into 3 sections and 12 chapters: (1) foundations of data systems, which covers reliable, scalable, and maintainable applications, data models and query languages, storage and retrieval, and encoding and evolution, (2) distributed data, which covers replication, partitioning, transactions, the trouble with distributed systems, and consistency and consensus, and (3) derived data, which covers batch processing, stream processing, and the future of data systems. The latter 6 chapters are weighted more heavily, with chapter 9 on consistency and consensus, and chapter 12 on the future of data systems, the most lengthy with each comprising about 12% of the book.
 Some potential readers might be disappointed that this book is all theory, but while the author does not provide any code he discusses practical implementation and specific details when applicable for comparisons within a product category. the last chapter is probably the most abstract simply because it explores ideas about how the tools covered in the prior two chapters might be used in the future to build reliable, scalable, and maintainable applications. Similiary, the chapter on the opposite end of this book sets the stage well for any developer of nontrivial applications with its section on thinking about database systems and the concerns around reliability, scalability, and maintainability.
@@ -11,9 +11,11 @@ Kleppman mentions that we typically think of databases, message brokers, caches,
 
 
 
-<span style="color: #f2cf4a; font-family: Babas; font-size: 2em;">Database Internals by Alex Petrov</span>
+- <span style="color: #f2cf4a; font-family: Babas; font-size: 2em;">Database Internals by Alex Petrov</span>
 
 
 
 ###### blog posts and source code links:
 - [Free learning platform for better future](https://www.javatpoint.com/dbms-tutorial)
+- [Practice SQL with cool challenges](https://www.hackerrank.com/domains/sql)
+- 
