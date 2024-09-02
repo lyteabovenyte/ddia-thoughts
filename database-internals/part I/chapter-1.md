@@ -125,4 +125,41 @@ different NoSQL type data stores:
 - A database system usually separates data files and index files: data files store data records, while index files store record metadata and use it to locate records in data files. Index files are typically smaller than the data files. Files are partitioned into pages, which typically have the size of a single or multiple disk blocks. Pages can be organized as sequences of records or as a *slotted pages*.
 New records (insertions) and updates to the existing records are represented by key/value pairs. Most modern storage systems do not delete data from pages explicitly. Instead, they use deletion markers (also called *tombstones*), which contain deletion metadata, such as a key and a timestamp. Space occupied by the records shadowed by their updates or deletion markers is reclaimed during *garbage collection*, which reads the pages, writes the live (i.e., nonshadowed) records to the new place, and discards the shadowed ones.
 
-- 
+- Data files (sometimes called primary files) can be implemented as index- organized tables (IOT), heap-organized tables (heap files), or hash-organized tables (hashed files). 
+    - heap-organized-files: Records in heap files are not required to follow any particular order, and most of the time they are placed in a write order. This way, no additional work or file reorganization is required when new pages are appended. Heap files require additional index structures, pointing to the locations where data records are stored, to make them searchable.
+    - hashed-organized-files: In hashed files, records are stored in buckets, and the hash value of the key determines which bucket a record belongs to. Records in the bucket can be stored in append order or sorted by key to improve lookup speed.
+    - index-organized-files: Index-organized tables (IOTs) store data records in the index itself. Since records are stored in key order, range scans in IOTs can be implemented by sequentially scanning its contents.
+
+- Storing data records in the index allows us to reduce the number of disk seeks by at least one, since after traversing the index and locating the searched key, we do not have to address a separate file to find the associated data record.
+
+- When records are stored in a separate file, index files hold data entries, uniquely identifying data records and containing enough information to locate them in the data file. For example, we can store file offsets (sometimes called row locators), locations of data records in the data file, or bucket IDs in the case of hash files. In index-organized tables, data entries hold actual data records.
+  - I also implemented this approach in my [Mock_distributed_services repo](https://github.com/lyteabovenyte/Mock_distributed_services/tree/main/internal/log) for commit-log service. in case you want to grasp on an implementation of this approach.
+
+##### primary index as an indirection
+
+- There are different opinions in the database community on whether data records should be referenced directly (through file offset) or via the primary key index
+
+  - Both approaches have their pros and cons and are better discussed in the scope of a complete implementation. By referencing data directly, we can reduce the number of disk seeks, but have to pay a cost of updating the pointers whenever the record is updated or relocated during a maintenance process. Using indirection in the form of a primary index allows us to reduce the cost of pointer updates, but has a higher cost on a read path.
+
+- MySQL InnoDB uses a primary index and performs two lookups: one in the secondary index, and one in a primary index when performing a query. This adds an overhead of a primary index lookup instead of following the offset directly from the secondary index.
+
+<img src=../images/figure1-6.png title="primary and secondary index"/>
+
+&nbsp;
+
+##### buffering, immutability and ordering
+- A storage engine is based on some data structure. However, these structures do not describe the semantics of caching, recovery, transactionality, and other things that storage engines add on top of them.
+- Storage structures have three common variables: they use buffering (or avoid using it), use immutable (or mutable) files, and store values in order (or out of order). Most of the distinctions and optimizations in storage structures discussed in this book are related to one of these three concepts.
+- *Buffering*:
+    - This defines whether or not the storage structure chooses to collect a certain amount of data in memory before putting it on disk. Of course, every on-disk structure has to use buffering to some degree, since the smallest unit of data transfer to and from the disk is a block, and it is desirable to write full blocks. Here, we’re talking about avoidable buffering, something storage engine implementers choose to do. One of the first optimizations we discuss in this book is adding in-memory buffers to B-Tree nodes to amortize I/O costs. However, this is not the only way we can apply buffering. For example, two-component LSM Trees, despite their similarities with B-Trees, use buffering in an entirely different way, and combine buffering with immutability.
+- *Mutability (or Immutability)*:
+    - This defines whether or not the storage structure reads parts of the file, updates them, and writes the updated results at the same location in the file. Immutable structures are append-only: once written, file contents are not modified. Instead, modifications are appended to the end of the file. There are other ways to implement immutability. One of them is copy-on-write, where the modified page, holding the updated version of the record, is written to the new location in the file, instead of its original location. Often the distinction between LSM and B-Trees is drawn as immutable against in-place update storage, but there are structures (for example, “Bw-Trees”) that are inspired by B-Trees but are immutable.
+- *Ordering*:
+    - This is defined as whether or not the data records are stored in the key order in the pages on disk. In other words, the keys that sort closely are stored in contiguous segments on disk. Ordering often defines whether or not we can efficiently scan the range of records, not only locate the individual data records. Storing data out of order (most often, in insertion order) opens up for some write-time optimizations. For example, Bitcask and WiscKey store data records directly in append-only files.
+
+### <span style="color: #f2cf4a; font-family: Babas; font-size: 2em;">Summary</span>
+
+In this chapter, we’ve discussed the architecture of a database management system and covered its primary components.
+To highlight the importance of disk-based structures and their difference from in- memory ones, we discussed memory- and disk-based stores. We came to the conclusion that disk-based structures are important for both types of stores, but are used for different purposes.
+To understand how access patterns influence database system design, we discussed column- and row-oriented database management systems and the primary factors that set them apart from each other. To start a conversation about how the data is stored, we covered data and index files.
+Lastly, we introduced three core concepts: buffering, immutability, and ordering. We will use them throughout this book to highlight properties of the storage engines that use them.
