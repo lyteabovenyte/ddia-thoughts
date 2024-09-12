@@ -3,12 +3,12 @@
     - Store data so that they, or another application, can find it again later (databases)
     - Remember the result of an expensive operation, to speed up reads (caches)
     - Allow users to search data by keyword or filter it in various ways (search indexes)
-    - Send a message to another process, to be handled asynchronously (stream pro‐ cessing)
+    - Send a message to another process, to be handled asynchronously (stream pro‐cessing)
     - Periodically crunch a large amount of accumulated data (batch processing)
 
 - the boudaries and differences between **kafka** and **Redis**. *worth researching!*
 
-- "if you have an application-managed caching layer (using Memcached or similar), or a full-text search server (such as Elasticsearch or Solr) separate from your main database, it is normally the application code’s responsibility to keep those caches and indexes in sync with the main database" --> think of it 🤓
+- "if you have an application-managed caching layer (using Memcached or similar), or a full-text search server (such as Elasticsearch or Solr) separate from your main database, it is normally the application code’s responsibility to keep those caches and indexes in sync with the main database" --> think of it 🤓 (some packages in application responsible for various tasks, connecting and signaling each other)
 
 - combining serveral components:
 ![combine_serveral_comp](../images/combine_serveral_comp.png)
@@ -38,7 +38,7 @@ where the decision to make a cache of all the tweets for a users timeline and wr
 - **throughput**: the number of records we can process per second, or the total time it takes to run a job on a dataset of a certain size
 
 
-- In a batch processing system such as Hadoop, we usually care about throughput—the number of records we can process per second, or the total time it takes to run a job on a dataset of a certain size. In online systems, what’s usually more important is the service’s response time—that is, the time between a client sending a request and receiving a response
+- In a batch processing system such as Hadoop, we usually care about throughput—the number of records we can process per second, or the total time it takes to run a job on a dataset of a certain size. In online systems, what’s usually more important is the service’s response time that is, the time between a client sending a request and receiving a response
 
 - Usually it is better to use percentiles. If you take your list of response times and sort it from fastest to slowest, then the median is the halfway point: for example, if your median response time is 200 ms, that means half your requests return in less than 200 ms, and half your requests take longer than that.
 
