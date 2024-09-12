@@ -81,3 +81,9 @@ When the connection to one of the servers fails or the server does not respond, 
 
 Backoff is used to increase time periods between requests from a single client. However, different clients using the same backoff strategy can produce substantial load as well. To prevent different clients from retrying all at once after the backoff period, we can introduce **jitter**. Jitter adds small random time periods to backoff and reduces the probability of clients waking up and retrying at the same time.
 
+
+Hardware failures, bit rot, and software errors can result in corruption that can propagate through standard delivery mechanisms. For example, corrupted data records can get replicated to the other nodes if they are not validated. Without validation mechanisms in place, a system can propagate corrupted data to the other nodes, potentially overwriting noncorrupted data records. To avoid that, we should use checksumming and validation to verify the integrity of any content exchanged between the nodes.
+
+
+An **idempotent** operation is one that can be executed multiple times, yielding the same result without producing additional side effects
+
