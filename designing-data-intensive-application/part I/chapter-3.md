@@ -55,3 +55,9 @@ Maintaining a sorted structure on disk is possible (“B-Trees”), but maintain
 ###### making B-Trees reliable
 - The basic underlying write operation of a B-tree is to overwrite a page on disk with new data. It is assumed that the overwrite does not change the location of the page; i.e., all references to that page remain intact when the page is overwritten. This is in stark contrast to log-structured indexes such as LSM-trees, which only append to files (and eventually delete obsolete files) but never modify files in place.
 - 
+
+
+
+#### more resources:
+- [multi-column index](https://use-the-index-luke.com/sql/where-clause/the-equals-operator/concatenated-keys#:~:text=A%20concatenated%20index%20is%20one,surname%2C%20then%20by%20first%20name.)
+- 
