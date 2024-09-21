@@ -1,5 +1,7 @@
-##### Researching on high-level and low-level aspects of database internals and data management systems while reading top papers and books out there
-###### I'll put some reference to the papers while reading the books through out the chapters and you'll find fine-tuned markdowns while navigating between book's chapters where I'll add my reasearch results between the notes and some good references to papers and blog posts that helps me better undrestand the concept.
+### Researching on high-level and low-level aspects of database internals and data management systems while reading top papers and books out there
+##### I'll put some reference to the papers while reading the books through out the chapters and you'll find fine-tuned markdowns while navigating between book's chapters where I'll add my reasearch results between the notes and some good references to papers and blog posts that helps me better undrestand the concept.
+
+###### ❗️although I'll try my best to extract the best and top-notch ideas of the books alongside the articles and best yt videos on that particular topic, but still highly recommend to read the books itself. cause you know, Authors know what are they doing❗️ (specially ddia ✅)
 
 #### List of Books:
 
