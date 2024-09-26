@@ -52,7 +52,7 @@ hardware faults:
 ##### semantic-web and RDF?
 
 - semantic web and resouce description framework?
-  The semantic web is fundamentally a simple and reasonable idea: websites already publish information as text and pictures for humans to read, so why don’t they also publish information as machine-readable data for computers to read? The Resource Description Framework (RDF) [41] was intended as a mechanism for different web‐ sites to publish data in a consistent format, allowing data from different websites to be automatically combined into a web of data—a kind of internet-wide “database of everything.”
+  The semantic web is fundamentally a simple and reasonable idea: websites already publish information as text and pictures for humans to read, so why don’t they also publish information as machine-readable data for computers to read? The Resource Description Framework (RDF) was intended as a mechanism for different web‐ sites to publish data in a consistent format, allowing data from different websites to be automatically combined into a web of data—a kind of internet-wide “database of everything.”
 
 - how can "_Triples_ can be a good internal data model for applications, even if you have no interest in publishing RDF data on the semantic web." statement be considered?
 - SPARQL is a query language for triple-stores using the RDF data model. (It is an acronym for SPARQL Protocol and RDF Query Language, pronounced “sparkle.”)
@@ -74,3 +74,11 @@ which aren’t data‐ base query languages but have interesting parallels.
 - a diverse research on _column-oriented_ storage
 
 #### chapter 4, encoding evolution
+
+
+
+#### chapter 9:
+- two event are ordered if they are causaly related. (one happened before another or after, the before-after relationship makes causality)
+- the advantage of lamport timestamp over version vector is that they are more compact.
+- how can we prevent dirty write and what is dirty write? actually, it need so much more research and detail that how theread committed prevent this?
+- 
