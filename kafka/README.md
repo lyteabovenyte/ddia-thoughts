@@ -1,0 +1,1 @@
+## learning kafka with Martin Kleppmann talks and book (Stream Processing) alongside the book from Gwen Shapira, kafka, the Definitive Guide
