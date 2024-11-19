@@ -23,4 +23,5 @@ networking, distributed computing, storage,** or other low-level details. Their 
 would be devoted to cluster administration and maintenance, managing overhead,
 and writing pipeline and transformation jobs, among other tasks.
 - Hadoop and Spark are widely used for distributed data storage and parallel processing, while Kafka enables real-time data streaming across systems. NoSQL databases like Cassandra and MongoDB are designed to scale horizontally across many servers, handling large amounts of unstructured data efficiently.
-- 
+- data engineers now focus on high-level abstractions or writing pipelines
+as code within an orchestration framework.
