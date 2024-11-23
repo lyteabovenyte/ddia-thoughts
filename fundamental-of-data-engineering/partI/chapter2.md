@@ -88,4 +88,73 @@ across different storage systems. Object stores, for example, don't manage schem
 metadata; instead, this must be managed in a **metastore**. On the other hand, cloud
 data warehouses manage schema metadata internally
 - [How do you manage metadata and versioning in object storage?](https://www.linkedin.com/advice/0/how-do-you-manage-metadata-versioning-object-storage)
+- A data engineer ensures **data quality** across the entire data engineering lifecycle. This
+involves performing data-quality tests, and ensuring data conformance to schema
+expectations, data completeness, and precision.
+  - *Accuracy*: Is the collected data factually correct? Are there duplicate values? Are the
+    numeric values accurate?
+  - *Completeness*: Are the records complete? Do all required fields contain valid values?
+  - *Timeliness*: Are records available in a timely fashion?
+- *Master data* is data about business entities such as employees, customers, products,
+and locations. Master data management (MDM) is the practice of building consistent entity definitions known as golden records.
+Golden records harmonize entity data across an
+organization and with its partners. MDM is a business operations process facilitated
+by building and deploying technology tools. For example, an MDM team might
+determine a standard format for addresses, and then work with data engineers to
+build an API to return consistent addresses and a system that uses address data to
+match customer records across company divisions.
+- To derive business insights from data, through business analytics and data science,
+the data must be in a usable form. The process for converting data into a usable
+form is known as **data modeling and design**. Data processing frameworks
+such as Spark can ingest a whole spectrum of data, from flat structured relational
+records to raw unstructured text.
+- As data moves through its lifecycle, how do you know what system affected the data
+or what the data is composed of as it gets passed around and transformed? **Data lineage** describes 
+the recording of an audit trail of data through its lifecycle, tracking
+both the systems that process the data and the upstream data it depends on.
+- [Data Observability Driven Development | The perfect analogy](https://www.kensu.io/blog/a-guide-to-understanding-data-observability-driven-development)
+- *Data integration and interoperability* is the process of integrating data across tools and
+processes.
+- **integration** happens through general-purpose APIs rather than custom
+database connections. For example, a data pipeline might pull data from the Salesforce API, 
+store it to Amazon S3, call the *Snowflake API* to load it into a table, call the
+API again to run a query, and then export the results to S3 where *Spark* can consume
+them.
+- Whereas *DevOps* aims to improve the release and quality
+of software products, *DataOps* does the same thing for data products.
+- DataOps is a collection of technical practices, workflows, cultural norms, and architectural patterns that enable:
+    - Rapid innovation and experimentation delivering new insights to customers with increasing velocity
+    - Extremely high data quality and very low error rates
+    - Collaboration across complex arrays of people, technology, and environments
+    - Clear measurement, monitoring, and transparency of results
+- in DataOps We suggest first starting with *observability* and *monitoring* to get a
+window into the performance of a system, then adding in *automation* and *incident response*
+- DataOps has three core technical elements: *automation*, *monitoring and observability*, and *incident response*
+- Modern-day infrastructures thrive on distributed environments. **Observability** refers to understanding the current state of a
+system or application with cumulative information gathered from its components. Observability often focuses on monitoring the system or application as a whole rather than governing the elements individually. A fully observable environment will have in-depth visibility into your network stack
+and will help you keep the network infrastructure in its optimal working condition at all times.
+- *Automation* enables reliability and consistency in the DataOps process and allows
+data engineers to quickly deploy new product features and improvements to existing
+workflows. DataOps automation has a similar framework and workflow to DevOps,
+consisting of change management (environment, code, and data version control),
+continuous integration/continuous deployment (CI/CD), and configuration as code.
+Like DevOps, DataOps practices monitor and maintain the reliability of technology
+and systems (data pipelines, orchestration, etc.), with the added dimension of checking 
+for data quality, data/model drift, metadata integrity, and more.
+- As the organization's data maturity grows, data engineers will typically adopt an
+orchestration framework, perhaps Airflow or Dagster. Data engineers are aware that
+Airflow presents an operational burden, but the benefits of orchestration eventually
+outweigh the complexity. Engineers will gradually migrate their cron jobs to Airflow
+jobs. Now, dependencies are checked before jobs run. More transformation jobs can
+be packed into a given time because each job can start as soon as upstream data is
+ready rather than at a fixed, predetermined time. The data engineering team still has room for operational improvements. A data
+scientist eventually deploys a broken DAG, bringing down the Airflow web server
+and leaving the data team operationally blind. After enough such headaches, the
+data engineering team members realize that they need to stop allowing manual DAG
+deployments. In their next phase of operational maturity, they adopt automated
+DAG deployment. DAGs are tested before deployment, and monitoring processes
+ensure that the new DAGs start running properly. In addition, data engineers block
+the deployment of new Python dependencies until installation is validated. After
+automation is adopted, the data team is much happier and experiences far fewer
+headaches.
 - 
