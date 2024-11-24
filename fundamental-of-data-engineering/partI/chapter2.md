@@ -157,4 +157,23 @@ ensure that the new DAGs start running properly. In addition, data engineers blo
 the deployment of new Python dependencies until installation is validated. After
 automation is adopted, the data team is much happier and experiences far fewer
 headaches.
-- 
+- a framework that builds DAGs based on the data lineage specification. --> how should this framework be implemented.
+- _data architecture_ is an undercurrent of the data engineering lifecycle.
+- _Orchestration_ is the process of coordinating many jobs to run as quickly and efficiently 
+as possible on a scheduled cadence. For instance, people often refer to
+orchestration tools like Apache Airflow as schedulers. This isn't quite accurate. A
+pure scheduler, such as cron, is aware only of time; an orchestration engine builds
+in metadata on job dependencies, generally in the form of a directed acyclic graph
+- We must point out that orchestration is strictly a batch concept.
+- data processing tasks such as joins that we take for granted in the
+batch processing world often become more complicated in real time, requiring more
+complex software engineering. Engineers must also write code to apply a variety
+of **windowing** methods. **Windowing** allows real-time systems to calculate valuable
+metrics such as trailing statistics. Engineers have many frameworks to choose from,
+including various function platforms (OpenFaaS, AWS Lambda, Google Cloud Functions) 
+for handling individual events or dedicated stream processors (Spark, Beam,
+Flink, or Pulsar) for analyzing streams to support reporting and real-time actions.
+- **Pipelines as code** is the core concept of present-day orchestration systems, which
+touch every stage of the data engineering lifecycle. Data engineers use code (typically
+Python) to declare data tasks and dependencies among them. The orchestration
+engine interprets these instructions to run steps using available resources.
