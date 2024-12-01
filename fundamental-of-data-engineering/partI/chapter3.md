@@ -36,13 +36,22 @@ well and lead effectively, common components become a fabric facilitating team
 collaboration and breaking down silos. Common components enable agility within
 and across teams in conjunction with shared knowledge and skills. Common components include* object storage*, *version-control systems*,
 *observability*, *monitoring* and *orchestration systems*, and *processing engines*.
-- *Object storage*, often referred to as object-based storage, is a data storage architecture ideal for storing, archiving, backing up and managing high volumes of **static unstructured data**—reliably, efficiently and affordably. Objects (data) in an object-storage system are accessed via Application Programming Interfaces (*APIs*).
+- **Object storage**, often referred to as object-based storage, is a data storage architecture ideal for storing, archiving, backing up and managing high volumes of **static unstructured data**—reliably, efficiently and affordably. Objects (data) in an object-storage system are accessed via Application Programming Interfaces (*APIs*).
 - **Serverless and Function as a Service (FaaS)**: Serverless code is invoked when an event occurs—such as when consuming from a Kafka topic. The primary concern is with the development of the application and not on the deployment, hosting, and infrastructure. These variables must still be considered to ensure sufficient processing capabilities but are minimal in comparison to traditional on-premises and self-hosted applications. Function as a Service (FaaS) solutions enable you to write code contained within a single function and register it as a listener on a specific Kafka topic. Upon consuming a new event, the FaaS provider starts up a function execution to process it and with any other events that may arrive during the function's execution window. FaaS providers traditionally pair this execution model with a “pay-as-you-go” billing model, making it even more attractive to workloads that run only intermittently.
 - an architect's job is to
 develop deep knowledge of the *baseline architecture* (current state), develop a *target architecture*, and map out a *sequencing plan* to determine priorities and the order of
 architecture changes.
+- **Securing VPC and API Control Plane**: 
+For a data engineer, securing the VPC and API Control Plane is critical to ensure data privacy, regulatory compliance, and protection against malicious actors. Securing the *Virtual Private Cloud* and *API Control Plane* is foundational in cloud-native environments for a data engineer. The VPC ensures data privacy and controlled network communication, while the API Control Plane enables efficient and secure management of cloud resources. By applying best practices in *authentication*, *access control*, *encryption*, and *monitoring*, *data engineers* can build robust systems that protect sensitive data and maintain compliance with organizational and regulatory standards
+- *FinOps* is an evolving cloud financial management discipline and cultural practice that
+enables organizations to get maximum business value by helping engineering, finance,
+technology, and business teams to collaborate on *data-driven spending decisions*.
+- there are several approaches commonly used in data governance:
+    - 1. *Content-Based Classification*: This method involves analyzing the content of the data to determine its classification.
+    - 2. *Context-Based Classification*: Context-based classification takes into account the context in which the data is used or stored. It considers factors such as the data's location, the purpose for which it is used, and the associated risks.
+    - 3. *User-Based Classification*: User-based classification involves assigning data classification based on the user's role or access privileges.
+    - 4. *Risk-Based Classification*: Risk-based classification assesses the potential impact and likelihood of data breaches or unauthorized access.
 - 
-
 
 
 ---
