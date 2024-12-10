@@ -87,4 +87,83 @@ tionships. The SET clause is very often used in combination with the MATCH claus
 update existing node or relationship properties. There is also a special syntax for a SET clause to change or mutate many properties
 using a map data structure.
 
+- Multiple node labels are helpful when you want to tag your nodes for faster and easier
+retrieval.
+
+- The `REMOVE` clause is the opposite of the SET clause. It is used to remove node labels
+and node and relationship properties. Removing a node property can also be under-
+stood as setting its value to null
+
+- the `DELETE` clause is used to delete nodes and relationships in the database. 
+
+- As deleting nodes with existing relationships is a frequent procedure, Cypher query
+language provides a `DETACH DELETE` clause that first deletes all the relationships
+attached to a node and then deletes the node itself.
+
+- The `MERGE` clause can be understood as a combination of using both the MATCH and
+CREATE clauses. Using the MERGE clause, you instruct the query engine first to try to
+match a given graph pattern, and if it does not exist, it should then create the pattern
+
+- The MERGE clause only supports inline graph pattern description and **cannot** be used
+in combination with a WHERE clause.
+
+- A statement that can be rerun multiple times and always output
+the same results is also known as an **idempotent** statement. When you import data into
+the graph database, it is advisable to use the MERGE instead of the CREATE clause
+
+- When designing a graph model, the best practice is to define a unique identifier
+for each node label. A unique identifier consists of defining a unique property
+value for each node in the graph
+
+- A MERGE clause can be followed by an optional ON CREATE SET and ON MATCH SET. 
+```sql
+MERGE (t:Person {name: "amir"})
+ON CREATE SET t.createdAt = datetime() -- if it does not exist, this will be invoked.
+ON MATCH SET t.updatedAt = datetime() -- if it exists this will be invoked.
+```
+- When creating or importing data to Neo4j, you typically want to split a
+Cypher statement into multiple MERGE clauses and merge nodes and relation-
+ships separately to enhance performance. When merging nodes, the best
+approach is to include only the node’s unique identifier property in the
+MERGE clause and add additional node properties with the ON MATCH SET or ON
+CREATE SET clauses.
+
+- Handling relationships is a bit different. If there can be at most a single
+relationship of one type between two nodes, like in the FRIEND example, then
+do not include any relationship properties in the MERGE clause. Instead, use
+the ON CREATE SET or ON MATCH SET clauses to set any relationship properties.
+However, if your graph model contains multiple relationships of the same
+type between a pair of nodes, then use only the unique identifier property of
+the relationship in the MERGE statement and set any additional properties the
+same as previously discussed
+
+- The Neo4j graph database model is considered **schemaless**, meaning you can add any
+type of nodes and relationships without defining the graph schema model. There are,
+however, some *constraints* you can add to your graph model to ensure data integrity.
+
+- You can think of unique constraints as a concept 
+similar to primary keys in relational databases, although the difference is that
+Neo4j’s unique constraint allows null values. it create an index on that unique constraint and
+make the query performance better in some regards.
+
+- defining constraint on a label and a unique property:
+```sql
+CREATE CONSTRAINT IF NOT EXISTS FOR (u:User) REQUIRE u.id IS UNIQUE;
+CREATE CONSTRAINT IF NOT EXISTS FOR (p:Tweet) REQUIRE p.id IS UNIQUE;
+```
+
+- The Cypher query language has a `LOAD CSV` clause that enables you to open and
+retrieve information from CSV files. The LOAD CSV clause can fetch local CSV files as
+well as CSV files from the internet. The LOAD CSV clause can load
+CSV files whether or not they contain a header. If the header is present, each row of
+the CSV file will be available as a *map* data structure that can be used later in the
+query. Conversely, when there is no header present, the rows will be available as *lists*.
+The LOAD CSV clause can also be used in combination with a `FIELDTERMINATOR` clause
+to set a custom delimiter, where you are, for example, dealing with a tab-separated
+value format.
+
+- It is important to note that the LOAD CSV clause returns all values as **strings** and
+makes no attempt to identify data types. You must convert the values to the correct
+data type in your Cypher import statements.
+
 - 
