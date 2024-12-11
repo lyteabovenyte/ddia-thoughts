@@ -166,4 +166,17 @@ value format.
 makes no attempt to identify data types. You must convert the values to the correct
 data type in your Cypher import statements.
 
+- the general rule of thumb is to split the import queries by *node labels* and
+*relationship types* as much as possible.
+
+- To define that the import should be split into multiple transactions, use the
+`CALL {}` clause to define a Cypher subquery that has the `IN TRANSACTIONS` clause
+appended. Any variables used in a Cypher subquery from the enclosing query must be
+explicitly defined and imported using the `WITH` clause. The query steps in the Cypher
+subquery will be executed for every row in the CSV file. (batch mode imports)
+
+- When you are importing any relationship into the database,
+you will most likely **match** or **merge** both source and target nodes and then connect
+them
+
 - 
