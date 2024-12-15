@@ -91,8 +91,22 @@ world and networks.
 when we need a subset with particular characteristics for focused analysis.
 
 - <img src=../images/network-structure.png>
-    - In a completely average distribution of connections, a random network is formed
+    - In a completely average distribution of connections, a **random network** is formed
     with no hierarchies. This type of shapeless graph is “flat” with no discernible pat‐
     terns. All nodes have the same probability of being attached to any other node.
-    - 
+    - A **small-world network** is extremely common in social networks; it shows local‐
+    ized connections and some *hub-and-spoke pattern*. The “Six Degrees of Kevin
+    Bacon” game might be the best-known example of the small-world effect.
+    Although you associate mostly with a small group of friends, you’re never many
+    hops away from anyone else—even if they are a famous actor or on the other side
+    of the planet.
+    - A **scale-free network** is produced when there are *power-law distributions* and a
+    hub-and-spoke architecture is preserved regardless of scale, such as in the World
+    Wide Web.
+
+- Some algorithms struggle with disconnected graphs and can produce misleading
+results. If we have unexpected results, checking the structure of our graph is a good first step.
+
+- <img src=../images/graph-att.png>
+
 - 
