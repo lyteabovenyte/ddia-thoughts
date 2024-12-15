@@ -32,4 +32,52 @@ science uses.
 - whole-graph operations are processed by computational algorithms and subgraph
 operations are queried in databases.
 
-- 
+- **Online transaction processing (OLTP)** operations are typically short activities like
+booking a ticket, crediting an account, booking a sale, and so forth. OLTP implies
+voluminous low-latency query processing and high data integrity. Although OLTP
+may involve only a small number of records per transaction, systems process many
+transactions concurrently.
+
+- **Online analytical processing (OLAP)** facilitates more complex queries and analysis
+over historical data. These analyses may include multiple data sources, formats, and
+types. Detecting trends, conducting “what-if ” scenarios, making predictions, and
+uncovering structural patterns are typical OLAP use cases. Compared to OLTP,
+OLAP systems process fewer but longer-running transactions over many records.
+OLAP systems are biased toward faster reading without the expectation of transac‐
+tional updates found in OLTP, and batch-oriented operation is common.
+
+- Bringing together analytics and transactions enables *continual analysis* as a natural
+part of regular operations. As data is gathered—from point-of-sale (POS) machines,
+manufacturing systems, or internet of things (IoT) devices—analytics now supports
+the ability to make real-time recommendations and decisions while processing. This
+trend was observed several years ago, and terms to describe this merging include
+**translytics** and **hybrid transactional and analytical processing (HTAP)**.
+
+- According to Gartner: [HTAP](https://www.snowflake.com/guides/htap-hybrid-transactional-and-analytical-processing/) could potentially redefine the way some business processes are executed, as
+real-time advanced analytics (for example, planning, forecasting and what-if analysis)
+becomes an integral part of the process itself, rather than a separate activity performed
+after the fact. This would enable new forms of real-time business-driven decision-
+making process. Ultimately, HTAP will become a key enabling architecture for intelli‐
+gent business operations.
+
+- As OLTP and OLAP become more integrated and begin to support functionality pre‐
+viously offered in only one silo, it’s no longer necessary to use different data products
+or systems for these workloads—we can simplify our architecture by using the same
+platform for both. This means our analytical queries can take advantage of real-time
+data and we can **streamline** the iterative process of analysis.
+
+- **Preferential attachment** is the phenomenon where the more connected a
+node is, the more likely it is to receive new links. This leads to uneven concentrations and
+hubs.
+
+- A **power law** (also called a *scaling law*) describes the relationship between two quanti‐
+ties where one quantity varies as a power of another. For instance, the area of a cube is
+related to the length of its sides by a power of 3. A well-known example is the Pareto
+distribution or “80/20 rule,” originally used to describe the situation where 20% of a
+population controlled 80% of the wealth. We see various power laws in the natural
+world and networks.
+
+##### At the most abstract level, graph analytics is applied to forecast behavior and prescribe action for **dynamic groups**. Doing this requires understanding the relationships and structure within the group. Graph algorithms accomplish this by examining the overall nature of networks through their connections. With this approach, you can understand the topology of connected systems and model their processes.
+
+- <img src=../images/graph-question-types.png>
+
