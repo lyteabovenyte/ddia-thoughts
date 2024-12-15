@@ -81,3 +81,18 @@ world and networks.
 
 - <img src=../images/graph-question-types.png>
 
+### chapter 2. Graph Theory and Concepts
+
+- The **labeled property** graph is one of the most popular ways of modeling graph data. A *label* marks a node as part of a group. `(:Person)` is a label which determine the group of that particular node.
+
+- <img src=../images/node-rel-types.png>
+
+- A *subgraph* is a graph within a larger graph. Subgraphs are useful as a filters such as
+when we need a subset with particular characteristics for focused analysis.
+
+- <img src=../images/network-structure.png>
+    - In a completely average distribution of connections, a random network is formed
+    with no hierarchies. This type of shapeless graph is “flat” with no discernible pat‐
+    terns. All nodes have the same probability of being attached to any other node.
+    - 
+- 
