@@ -109,4 +109,34 @@ results. If we have unexpected results, checking the structure of our graph is a
 
 - <img src=../images/graph-att.png>
 
+- Many algorithms allow us to compute on the basis of only inbound or outbound connections, both directions, or without direction.
+
+- In graph theory, cycles are paths through relationships and nodes that start and end at
+the same node. An acyclic graph has no such cycles, both
+directed and undirected graphs can have cycles, but when directed, paths follow the
+relationship direction. A **directed acyclic graph (DAG)**, will by definition always have dead ends (also called *leaf nodes*).
+
+- Cycles are common, and we sometimes need to convert cyclic graphs to acyclic
+graphs (by cutting relationships) to eliminate processing problems. Directed acyclic
+graphs naturally arise in scheduling, genealogy, and version histories.
+
+- In classic graph theory, an acyclic graph that is undirected is called a **tree**. In com‐
+puter science, trees can also be directed. A more inclusive definition would be a *graph where any two nodes are connected by only one path*. Trees are significant for under‐
+standing graph structures and many algorithms. They play a key role in designing
+*networks*, *data structures*, and *search optimizations* to improve *categorization* or
+*organizational hierarchies*.
+
+- <img src=../images/tree.png>
+
+- Some algorithms will return nonsensical results when executed on extremely sparse
+or dense graphs. If a graph is too sparse there may not be enough relationships for
+algorithms to compute useful results. Alternatively, very densely connected nodes
+don’t add much additional information since they are so highly connected. High den‐
+sities can also skew some results or add computational complexity. In these situations,
+filtering out the relevant subgraph is a practical approach.
+
+- Projecting monopartite graphs with inferred connections is an important part of
+graph analysis. Bipartite graphs are often projected to monopartite graphs for more specific
+analysis.
+
 - 
