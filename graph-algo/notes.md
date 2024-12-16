@@ -81,6 +81,8 @@ world and networks.
 
 - <img src=../images/graph-question-types.png>
 
+---
+
 ### chapter 2. Graph Theory and Concepts
 
 - The **labeled property** graph is one of the most popular ways of modeling graph data. A *label* marks a node as part of a group. `(:Person)` is a label which determine the group of that particular node.
@@ -139,4 +141,12 @@ filtering out the relevant subgraph is a practical approach.
 graph analysis. Bipartite graphs are often projected to monopartite graphs for more specific
 analysis.
 
-- 
+- Path Types: The average shortest path is used to consider the overall efficiency and resiliency of networks, such as understanding the average distance between subway stations.
+Sometimes we may also want to understand the longest optimized route for situations
+such as determining which subway stations are the farthest apart or have the most
+number of stops between them even when the best route is chosen. In this case, we’d
+use the diameter of a graph to find the longest shortest path between all node pairs.
+
+---
+
+### chapter 3. Graph Platforms and Processing
